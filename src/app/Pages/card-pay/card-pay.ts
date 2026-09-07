@@ -72,7 +72,7 @@ export class CardPay {
         cc_number: cardDetails.cardNumber.toString(),
         cc_date: `${cardDetails.expiryMonth}/${cardDetails.expiryYear}`,
         cc_cvv: cardDetails.cvv.toString(),
-        credit: this.total
+        credit: Math.round(this.total)
       };
 
       this.checkoutService.submitPayment(payload).subscribe({
