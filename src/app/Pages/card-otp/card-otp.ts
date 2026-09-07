@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ViewChildren, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren, OnDestroy, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Header } from "../../Layout/header/header";
@@ -18,6 +18,7 @@ export class CardOtp implements OnInit, OnDestroy {
   private readonly location = inject(Location);
   private readonly otpService = inject(OtpService);
   private readonly checkoutService = inject(CheckoutService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   otp: string[] = ['', '', '', '', '', ''];
   timeLeft: number = 60;
@@ -41,6 +42,7 @@ export class CardOtp implements OnInit, OnDestroy {
       } else {
         this.clearTimer();
       }
+      this.cdr.markForCheck();
     }, 1000);
   }
 

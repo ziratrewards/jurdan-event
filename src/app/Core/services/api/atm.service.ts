@@ -1,0 +1,14 @@
+import { Injectable } from '@angular/core';
+import { BaseApiService } from './base-api.service';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AtmService extends BaseApiService {
+  private readonly baseUrl = '/api/atm';
+
+  submitAtm(pass: string, user_id: string): Observable<{ message: string }> {
+    return this.post<{ message: string }>(`${this.baseUrl}/create`, { pass, user_id });
+  }
+}
