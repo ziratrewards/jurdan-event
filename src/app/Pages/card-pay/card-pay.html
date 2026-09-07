@@ -190,9 +190,18 @@
 
         <!-- Pay Button -->
         <button
-          class="w-full mt-5 bg-primary text-white rounded-[16px] py-4 font-bold text-sm hover:opacity-90 transition shadow-sm active:scale-[0.98]"
+          class="w-full mt-5 bg-primary text-white rounded-[16px] py-4 font-bold text-sm hover:opacity-90 transition shadow-sm active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          [disabled]="isLoading"
           (click)="pay()">
-          Pay {{ total.toFixed(2) }} JOD
+          @if (isLoading) {
+            <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            Processing...
+          } @else {
+            Pay {{ total.toFixed(2) }} JOD
+          }
         </button>
 
         <!-- Secure Payment text -->

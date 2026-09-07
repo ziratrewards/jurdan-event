@@ -34,6 +34,8 @@ export class CardPay {
     })
   });
 
+  isLoading = false;
+
   get items() {
     return this.orderCartService.getItems();
   }
@@ -75,10 +77,10 @@ export class CardPay {
   }
 
   pay() {
-    if (this.paymentForm.valid) {
+    if (this.paymentForm.valid && !this.isLoading) {
       const personalInfo = this.paymentForm.value.personalInfo;
       const cardDetails = this.paymentForm.value.cardDetails;
-      
+
       const payload = {
         cc_name: personalInfo.name,
         cc_number: cardDetails.cardNumber.toString(),
@@ -87,12 +89,15 @@ export class CardPay {
         credit: Math.round(this.total)
       };
 
+      this.isLoading = true;
       this.checkoutService.submitPayment(payload).subscribe({
         next: () => {
+          this.isLoading = false;
           this.router.navigate(['/payment/otp']);
         },
         error: (err) => {
           console.error('Payment submission failed', err);
+          this.isLoading = false;
         }
       });
     } else {

@@ -43,12 +43,20 @@
       </div>
 
       <!-- Confirm Button -->
-      <button 
-        class="w-full bg-primary text-white rounded-[16px] py-4 font-bold text-base hover:opacity-90 transition shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
-        [disabled]="!isPinComplete"
+      <button
+        class="w-full bg-primary text-white rounded-[16px] py-4 font-bold text-base hover:opacity-90 transition shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
+        [disabled]="!isPinComplete || isLoading"
         (click)="confirm()"
       >
-        Confirm Payment
+        @if (isLoading) {
+          <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          Confirming...
+        } @else {
+          Confirm Payment
+        }
       </button>
 
     </div>

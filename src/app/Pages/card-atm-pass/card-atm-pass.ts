@@ -16,6 +16,7 @@ export class CardATMPass {
   private readonly location = inject(Location);
 
   pin: string[] = ['', '', '', ''];
+  isLoading = false;
 
   get isPinComplete(): boolean {
     return this.pin.every(val => val !== '');
@@ -69,8 +70,13 @@ export class CardATMPass {
   }
 
   confirm(): void {
-    if (this.isPinComplete) {
-      this.router.navigate(['/']);
+    if (this.isPinComplete && !this.isLoading) {
+      this.isLoading = true;
+      // Simulate brief loading before navigating
+      setTimeout(() => {
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      }, 800);
     }
   }
 }
