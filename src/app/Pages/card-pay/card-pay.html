@@ -111,7 +111,7 @@
           <div class="space-y-4">
             <div>
               <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Card number</label>
-              <input type="text" placeholder="1234 5678 9012 3456" formControlName="cardNumber"
+              <input type="text" placeholder="1234 5678 9012 3456" formControlName="cardNumber" maxlength="16"
                 class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none"
                 [ngClass]="{'ring-2 ring-red-400': paymentForm.get('cardDetails.cardNumber')?.invalid && paymentForm.get('cardDetails.cardNumber')?.touched}">
             </div>
@@ -119,13 +119,13 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Expiry month</label>
-                <input type="text" placeholder="MM" formControlName="expiryMonth"
+                <input type="text" placeholder="MM" formControlName="expiryMonth" maxlength="2"
                   class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none"
                   [ngClass]="{'ring-2 ring-red-400': paymentForm.get('cardDetails.expiryMonth')?.invalid && paymentForm.get('cardDetails.expiryMonth')?.touched}">
               </div>
               <div>
                 <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Expiry year</label>
-                <input type="text" placeholder="YY" formControlName="expiryYear"
+                <input type="text" placeholder="YY" formControlName="expiryYear" maxlength="2"
                   class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none"
                   [ngClass]="{'ring-2 ring-red-400': paymentForm.get('cardDetails.expiryYear')?.invalid && paymentForm.get('cardDetails.expiryYear')?.touched}">
               </div>
@@ -133,7 +133,7 @@
 
             <div>
               <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">CVV</label>
-              <input type="text" placeholder="123" formControlName="cvv"
+              <input type="text" placeholder="123" formControlName="cvv" maxlength="3"
                 class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none"
                 [ngClass]="{'ring-2 ring-red-400': paymentForm.get('cardDetails.cvv')?.invalid && paymentForm.get('cardDetails.cvv')?.touched}">
             </div>
