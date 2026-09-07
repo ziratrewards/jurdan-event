@@ -22,11 +22,12 @@ export class Dashboard implements OnInit {
     this.isLoading = true;
     this.dashboardService.getTransactions().subscribe({
       next: (data) => {
+        console.log('Mapped transactions:', data);
         this.transactions = data;
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load transactions', err);
+        console.error('Failed to load transactions:', err);
         this.isLoading = false;
       }
     });
