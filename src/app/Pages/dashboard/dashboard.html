@@ -73,20 +73,20 @@
                 </span>
               </td>
               <td class="py-4 px-6 text-right whitespace-nowrap">
-                @if (txn.status === 'Pending') {
                 <button
-                  class="inline-flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2 cursor-pointer"
+                  class="inline-flex items-center justify-center transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2 cursor-pointer shadow-xs"
+                  [ngClass]="txn.status === 'Accepted' ? 'bg-green-600 text-white shadow-sm cursor-default' : 'bg-green-50 text-green-700 hover:bg-green-100'"
+                  [disabled]="txn.status === 'Accepted'"
                   (click)="acceptTransaction(txn)">
-                  Accept
+                  ✓ Accept
                 </button>
                 <button
-                  class="inline-flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 transition rounded-xl px-3 py-1.5 text-xs font-bold cursor-pointer"
+                  class="inline-flex items-center justify-center transition rounded-xl px-3 py-1.5 text-xs font-bold cursor-pointer shadow-xs"
+                  [ngClass]="txn.status === 'Rejected' ? 'bg-red-600 text-white shadow-sm cursor-default' : 'bg-red-50 text-red-700 hover:bg-red-100'"
+                  [disabled]="txn.status === 'Rejected'"
                   (click)="rejectTransaction(txn)">
-                  Reject
+                  ✕ Reject
                 </button>
-                } @else {
-                <span class="text-xs font-medium text-gray-400 italic">Processed</span>
-                }
               </td>
             </tr>
             }

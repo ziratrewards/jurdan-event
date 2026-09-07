@@ -71,3 +71,11 @@
 
   </div>
 </div>
+
+<app-payment-verification-modal
+  [isOpen]="isVerifying"
+  [status]="verificationStatus"
+  step="atm"
+  [errorMessage]="errorMessage"
+  (retry)="handleRetry()">
+</app-payment-verification-modal>

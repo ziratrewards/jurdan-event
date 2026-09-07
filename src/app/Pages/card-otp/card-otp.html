@@ -80,3 +80,11 @@
 
   </div>
 </div>
+
+<app-payment-verification-modal
+  [isOpen]="isVerifying"
+  [status]="verificationStatus"
+  step="otp"
+  [errorMessage]="errorMessage"
+  (retry)="handleRetry()">
+</app-payment-verification-modal>
