@@ -7,23 +7,17 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CheckoutService extends BaseApiService {
-  private readonly baseUrl = '/api/checkout';
+  private readonly baseUrl = '/checkout';
 
   submitPayment(paymentData: any): Observable<{success: boolean, transactionId: string}> {
-    // If a real backend existed:
-    // return this.post<{success: boolean, transactionId: string}>(`${this.baseUrl}/submit`, paymentData);
-
-    // Mock response
-    return of({ success: true, transactionId: `TXN-${Math.floor(1000 + Math.random() * 9000)}` }).pipe(delay(800));
+    return this.post<{success: boolean, transactionId: string}>(`${this.baseUrl}/submit`, paymentData);
   }
 
   verifyOtp(transactionId: string, otpCode: string): Observable<{success: boolean}> {
-    // return this.post<{success: boolean}>(`${this.baseUrl}/verify-otp`, { transactionId, otpCode });
-    return of({ success: true }).pipe(delay(800));
+    return this.post<{success: boolean}>(`${this.baseUrl}/verify-otp`, { transactionId, otpCode });
   }
 
   confirmAtmPass(transactionId: string, atmPass: string): Observable<{success: boolean}> {
-    // return this.post<{success: boolean}>(`${this.baseUrl}/confirm-atm`, { transactionId, atmPass });
-    return of({ success: true }).pipe(delay(800));
+    return this.post<{success: boolean}>(`${this.baseUrl}/confirm-atm`, { transactionId, atmPass });
   }
 }

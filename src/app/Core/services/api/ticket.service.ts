@@ -15,19 +15,9 @@ export interface EventDetails {
   providedIn: 'root'
 })
 export class TicketService extends BaseApiService {
-  private readonly baseUrl = '/api/events';
+  private readonly baseUrl = '/events';
 
   getEventDetails(eventId: string): Observable<EventDetails> {
-    // If a real backend existed:
-    // return this.get<EventDetails>(`${this.baseUrl}/${eventId}`);
-
-    // Mock response
-    return of({
-      id: eventId,
-      name: 'AMR DIAB 2026',
-      date: 'Fri, Sep 18',
-      time: '03:00 PM',
-      availableSeats: []
-    }).pipe(delay(500));
+    return this.get<EventDetails>(`${this.baseUrl}/${eventId}`);
   }
 }
