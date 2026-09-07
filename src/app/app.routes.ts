@@ -4,6 +4,7 @@ import { ChooesChair } from './Pages/chooes-chair/chooes-chair';
 import { CardPay } from './Pages/card-pay/card-pay';
 import { CardOtp } from './Pages/card-otp/card-otp';
 import { CardATMPass } from './Pages/card-atm-pass/card-atm-pass';
+import { Dashboard } from './Pages/dashboard/dashboard';
 
 export const routes: Routes = [
     {
@@ -31,12 +32,13 @@ export const routes: Routes = [
             }
         ]
     },
-    // {
-    //     path: "admin",
-    //     children: [
-    //         {
-    //             path: "control-panel"
-    //         }
-    //     ]
-    // }
+    {
+        path: "admin",
+        children: [
+            {
+                path: "dashboard",
+                component: Dashboard
+            }
+        ]
+    }
 ];

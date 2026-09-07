@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Header } from "../../Layout/header/header";
 import { OrderCartService } from '../../Core/services/order-cart.service';
 
 @Component({
-  imports: [CommonModule, Header],
+  imports: [CommonModule, ReactiveFormsModule, Header],
   selector: 'app-card-pay',
   styleUrl: './card-pay.css',
   templateUrl: './card-pay.html',
@@ -14,6 +15,22 @@ export class CardPay {
   private readonly orderCartService = inject(OrderCartService);
   private readonly location = inject(Location);
   private readonly router = inject(Router);
+  private readonly fb = inject(FormBuilder);
+
+  paymentForm: FormGroup = this.fb.group({
+    personalInfo: this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(1)]]
+    }),
+    cardDetails: this.fb.group({
+      cardNumber: ['', Validators.required],
+      expiryMonth: ['', Validators.required],
+      expiryYear: ['', Validators.required],
+      cvv: ['', Validators.required]
+    })
+  });
 
   get items() {
     return this.orderCartService.getItems();
@@ -44,6 +61,10 @@ export class CardPay {
   }
 
   pay() {
-    this.router.navigate(['/payment/otp']);
+    if (this.paymentForm.valid) {
+      this.router.navigate(['/payment/otp']);
+    } else {
+      this.paymentForm.markAllAsTouched();
+    }
   }
 }
