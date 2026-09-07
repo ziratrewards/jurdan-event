@@ -127,9 +127,14 @@
               <span class="font-bold text-gray-900">{{ subtotal.toFixed(2) }} JOD</span>
             </div>
 
-            <div class="flex items-center justify-between text-xs text-gray-400 font-medium">
+            <div class="flex items-center justify-between text-xs text-gray-400 font-medium mb-3">
               <span>service charge (4%)</span>
               <span>{{ serviceCharge.toFixed(2) }} JOD</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-red-500 font-bold">
+              <span>Discount (30%)</span>
+              <span>-{{ discount.toFixed(2) }} JOD</span>
             </div>
           </div>
 

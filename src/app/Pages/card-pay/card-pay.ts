@@ -31,8 +31,12 @@ export class CardPay {
     return this.subtotal * 0.04;
   }
 
+  get discount() {
+    return (this.subtotal + this.serviceCharge) * 0.3;
+  }
+
   get total() {
-    return this.subtotal + this.serviceCharge;
+    return (this.subtotal + this.serviceCharge) - this.discount;
   }
 
   goBack() {
