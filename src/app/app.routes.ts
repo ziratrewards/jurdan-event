@@ -32,13 +32,8 @@ export const routes: Routes = [
             }
         ]
     },
-    {
-        path: "admin",
-        children: [
             {
-                path: "dashboard",
+                path: "d69de11b965d34729de6e657d1e8883eccdd42c4c8d13f8224dbdb1c98aece20",
                 component: Dashboard
             }
-        ]
-    }
 ];
