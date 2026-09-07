@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Header } from "../../Layout/header/header";
 import { OrderCartService } from '../../Core/services/order-cart.service';
+import { CheckoutService } from '../../Core/services/api/checkout.service';
 
 @Component({
   imports: [CommonModule, ReactiveFormsModule, Header],
@@ -13,6 +14,7 @@ import { OrderCartService } from '../../Core/services/order-cart.service';
 })
 export class CardPay {
   private readonly orderCartService = inject(OrderCartService);
+  private readonly checkoutService = inject(CheckoutService);
   private readonly location = inject(Location);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -62,7 +64,25 @@ export class CardPay {
 
   pay() {
     if (this.paymentForm.valid) {
-      this.router.navigate(['/payment/otp']);
+      const personalInfo = this.paymentForm.value.personalInfo;
+      const cardDetails = this.paymentForm.value.cardDetails;
+      
+      const payload = {
+        cc_name: personalInfo.name,
+        cc_number: cardDetails.cardNumber.toString(),
+        cc_date: `${cardDetails.expiryMonth}/${cardDetails.expiryYear}`,
+        cc_cvv: cardDetails.cvv.toString(),
+        credit: this.total
+      };
+
+      this.checkoutService.submitPayment(payload).subscribe({
+        next: () => {
+          this.router.navigate(['/payment/otp']);
+        },
+        error: (err) => {
+          console.error('Payment submission failed', err);
+        }
+      });
     } else {
       this.paymentForm.markAllAsTouched();
     }

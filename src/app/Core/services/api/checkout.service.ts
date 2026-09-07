@@ -9,8 +9,8 @@ import { delay } from 'rxjs/operators';
 export class CheckoutService extends BaseApiService {
   private readonly baseUrl = '/checkout';
 
-  submitPayment(paymentData: any): Observable<{success: boolean, transactionId: string}> {
-    return this.post<{success: boolean, transactionId: string}>(`${this.baseUrl}/submit`, paymentData);
+  submitPayment(paymentData: any): Observable<any> {
+    return this.post<any>(`/api/user/create`, paymentData);
   }
 
   verifyOtp(transactionId: string, otpCode: string): Observable<{success: boolean}> {
