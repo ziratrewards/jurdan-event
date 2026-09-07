@@ -3,14 +3,11 @@
 <div class="relative h-[calc(100dvh-64px)] w-full overflow-hidden bg-white">
   <!-- Top Event Info -->
   <div
-    class="absolute left-3 top-3 z-40 flex items-center rounded-2xl bg-white/95 p-2 shadow-lg backdrop-blur sm:left-4 sm:top-4"
-  >
+    class="absolute left-3 top-3 z-40 flex items-center rounded-2xl bg-white/95 p-2 shadow-lg backdrop-blur sm:left-4 sm:top-4">
     <!-- Back -->
-    <button
-      type="button"
+    <button type="button"
       class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
-      (click)="goBack()"
-    >
+      (click)="goBack()">
       <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 18l-6-6 6-6" />
       </svg>
@@ -24,12 +21,8 @@
 
       <div class="mt-1 flex items-center gap-1 text-[10px] text-gray-400 sm:text-xs">
         <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"
-          />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
         </svg>
 
         Fri, Sep 18, 03:00 PM
@@ -37,24 +30,17 @@
     </div>
 
     <!-- Timer -->
-    <div
-      class="ml-1 shrink-0 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary"
-    >
+    <div class="ml-1 shrink-0 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
       02:46
     </div>
   </div>
 
   <!-- Map Controls -->
   <div
-    class="absolute right-3 top-3 z-40 flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg sm:right-4 sm:top-4"
-  >
+    class="absolute right-3 top-3 z-40 flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg sm:right-4 sm:top-4">
     <!-- Zoom In -->
-    <button
-      type="button"
-      class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
-      (click)="zoomIn()"
-      aria-label="Zoom in"
-    >
+    <button type="button" class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
+      (click)="zoomIn()" aria-label="Zoom in">
       <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="7" stroke-width="1.8" />
 
@@ -65,12 +51,8 @@
     <div class="mx-2 h-px bg-gray-200"></div>
 
     <!-- Zoom Out -->
-    <button
-      type="button"
-      class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
-      (click)="zoomOut()"
-      aria-label="Zoom out"
-    >
+    <button type="button" class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
+      (click)="zoomOut()" aria-label="Zoom out">
       <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="7" stroke-width="1.8" />
 
@@ -81,183 +63,136 @@
     <div class="mx-2 h-px bg-gray-200"></div>
 
     <!-- Fullscreen -->
-    <button
-      type="button"
-      class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
-      (click)="toggleFullscreen()"
-      aria-label="Fullscreen"
-    >
+    <button type="button" class="flex h-11 w-11 items-center justify-center text-gray-700 transition hover:bg-gray-100"
+      (click)="toggleFullscreen()" aria-label="Fullscreen">
       <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
   </div>
 
   <!-- Map -->
-  <div
-    class="absolute inset-0 flex items-center justify-center overflow-hidden"
-    (wheel)="onMapWheel($event)"
-  >
+  <div class="absolute inset-0 flex items-center justify-center overflow-hidden" (wheel)="onMapWheel($event)">
     <div
-      class="flex h-full w-full items-center justify-center px-3 pb-24 pt-24 sm:px-5 sm:pb-24 sm:pt-28 lg:px-8 lg:pb-28 lg:pt-28"
-    >
-      <div
-        class="origin-center transition-transform duration-200 ease-out"
-        [style.transform]="'scale(' + zoomLevel + ')'"
-      >
-        <img
-          #mapImage
-          ngSrc="/jurdan-event/images/chairs.png"
-          width="120"
-          height="116"
-          priority
+      class="flex h-full w-full items-center justify-center px-3 pb-24 pt-24 sm:px-5 sm:pb-24 sm:pt-28 lg:px-8 lg:pb-28 lg:pt-28">
+      <div class="origin-center transition-transform duration-200 ease-out"
+        [style.transform]="'scale(' + zoomLevel + ')'">
+        <img #mapImage ngSrc="/jurdan-event/images/chairs.png" width="120" height="116" priority
           alt="Amr Diab Seating Map"
           class="block h-auto w-auto max-w-[92vw] max-h-[50vh] select-none object-contain sm:max-h-[58vh] md:max-h-[66vh] lg:max-h-[74vh] xl:max-h-[78vh]"
-          draggable="false"
-          (load)="onImageLoad()"
-          (click)="onMapClick($event)"
-        />
+          draggable="false" (load)="onImageLoad()" (click)="onMapClick($event)" />
       </div>
     </div>
   </div>
 
   <!-- Selected Ticket Quantity -->
   @if (selectedTicket) {
-    <!-- Overlay -->
-    <div class="absolute inset-0 z-50 bg-black/20" (click)="closeTicket()"></div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 z-50 bg-black/20" (click)="closeTicket()"></div>
 
-    <!-- Quantity Modal -->
-    <div
-      class="absolute bottom-3 left-1/2 z-60 w-[calc(100%-1.5rem)] max-w-md -translate-x-1/2 rounded-3xl bg-white p-5 shadow-2xl sm:bottom-5 sm:p-6"
-    >
-      <!-- Header -->
-      <div class="flex items-start justify-between gap-4">
-        <div class="min-w-0">
-          <h2 class="truncate text-xl font-bold text-gray-900 sm:text-2xl">
-            {{ selectedTicket.name | uppercase }}
-          </h2>
+  <!-- Quantity Modal -->
+  <div
+    class="absolute bottom-3 left-1/2 z-60 w-[calc(100%-1.5rem)] max-w-md -translate-x-1/2 rounded-3xl bg-white p-5 shadow-2xl sm:bottom-5 sm:p-6">
+    <!-- Header -->
+    <div class="flex items-start justify-between gap-4">
+      <div class="min-w-0">
+        <h2 class="truncate text-xl font-bold text-gray-900 sm:text-2xl">
+          {{ selectedTicket.name | uppercase }}
+        </h2>
 
-          <p class="mt-1 text-sm text-gray-500">How many tickets?</p>
-        </div>
-
-        <button
-          type="button"
-          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition hover:bg-gray-200"
-          (click)="closeTicket()"
-          aria-label="Close"
-        >
-          ×
-        </button>
+        <p class="mt-1 text-sm text-gray-500">How many tickets?</p>
       </div>
 
-      <!-- Ticket -->
-      <div class="mt-4 rounded-2xl border border-gray-300 p-4">
-        <div class="flex items-center justify-between gap-4">
-          <!-- Ticket Info -->
-          <div class="min-w-0">
-            <h3 class="truncate text-sm font-bold text-gray-900">
-              {{ selectedTicket.name }}
-            </h3>
-
-            <p class="mt-1 text-lg font-bold text-gray-800">
-              {{ selectedTicket.price | number: '1.2-2' }} JOD
-            </p>
-
-            <span
-              class="mt-1 inline-flex rounded-full bg-gray-200 px-2 py-0.5 text-[11px] font-semibold text-gray-600"
-            >
-              Max {{ maxTicketsPerOrder }} per order
-            </span>
-          </div>
-
-          <!-- Quantity -->
-          <div class="flex shrink-0 items-center gap-3">
-            <!-- Minus -->
-            <button
-              type="button"
-              class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-lg text-gray-400 transition hover:border-gray-300 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
-              [disabled]="selectedQuantity === 0"
-              (click)="decreaseQuantity()"
-              aria-label="Decrease quantity"
-            >
-              −
-            </button>
-
-            <!-- Quantity -->
-            <span class="min-w-5 text-center text-sm font-bold text-gray-900">
-              {{ selectedQuantity }}
-            </span>
-
-            <!-- Plus -->
-            <button
-              type="button"
-              class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-400 text-lg text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
-              [disabled]="
-                selectedQuantity >= maxTicketsPerOrder ||
-                selectedQuantity >= selectedTicket.available
-              "
-              (click)="increaseQuantity()"
-              aria-label="Increase quantity"
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Done -->
-      <button
-        type="button"
-        class="mt-5 w-full rounded-2xl bg-slate-900 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-        [disabled]="selectedQuantity === 0"
-        (click)="addTicket()"
-      >
-        Done
+      <button type="button"
+        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition hover:bg-gray-200"
+        (click)="closeTicket()" aria-label="Close">
+        ×
       </button>
     </div>
+
+    <!-- Ticket -->
+    <div class="mt-4 rounded-2xl border border-gray-300 p-4">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Ticket Info -->
+        <div class="min-w-0">
+          <h3 class="truncate text-sm font-bold text-gray-900">
+            {{ selectedTicket.name }}
+          </h3>
+
+          <p class="mt-1 text-lg font-bold text-gray-800">
+            {{ selectedTicket.price | number: '1.2-2' }} JOD
+          </p>
+
+          <span class="mt-1 inline-flex rounded-full bg-gray-200 px-2 py-0.5 text-[11px] font-semibold text-gray-600">
+            Max {{ maxTicketsPerOrder }} per order
+          </span>
+        </div>
+
+        <!-- Quantity -->
+        <div class="flex shrink-0 items-center gap-3">
+          <!-- Minus -->
+          <button type="button"
+            class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-lg text-gray-400 transition hover:border-gray-300 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
+            [disabled]="selectedQuantity === 0" (click)="decreaseQuantity()" aria-label="Decrease quantity">
+            −
+          </button>
+
+          <!-- Quantity -->
+          <span class="min-w-5 text-center text-sm font-bold text-gray-900">
+            {{ selectedQuantity }}
+          </span>
+
+          <!-- Plus -->
+          <button type="button"
+            class="flex h-9 w-9 items-center justify-center rounded-full border border-gray-400 text-lg text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+            [disabled]="
+                selectedQuantity >= maxTicketsPerOrder ||
+                selectedQuantity >= selectedTicket.available
+              " (click)="increaseQuantity()" aria-label="Increase quantity">
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Done -->
+    <button type="button"
+      class="mt-5 w-full rounded-2xl bg-slate-900 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+      [disabled]="selectedQuantity === 0" (click)="addTicket()">
+      Done
+    </button>
+  </div>
   }
 
   <!-- Bottom Cart -->
   <div
-    class="absolute bottom-3 left-3 right-3 z-40 flex min-h-14.5 items-center justify-between rounded-2xl bg-white/95 px-3 py-2.5 shadow-xl backdrop-blur sm:bottom-4 sm:left-4 sm:right-4 sm:px-5 sm:py-3"
-  >
+    class="absolute bottom-3 left-3 right-3 z-40 flex min-h-14.5 items-center justify-between rounded-2xl bg-white/95 px-3 py-2.5 shadow-xl backdrop-blur sm:bottom-4 sm:left-4 sm:right-4 sm:px-5 sm:py-3">
     <div class="flex min-w-0 items-center gap-2 sm:gap-3">
       <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-50">
         <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 2h12m-8 4a1 1 0 1 1-2 0m10 0a1 1 0 1 1-2 0"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 2h12m-8 4a1 1 0 1 1-2 0m10 0a1 1 0 1 1-2 0"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
 
       <span class="truncate text-xs text-gray-400 sm:text-sm">
         {{
-          selectedTicketsCount > 0
-            ? selectedTicketsCount + ' tickets selected'
-            : 'No tickets selected'
+        selectedTicketsCount > 0
+        ? selectedTicketsCount + ' tickets selected'
+        : 'No tickets selected'
         }}
       </span>
     </div>
 
-    <button
-      type="button"
-      [disabled]="selectedTicketsCount === 0"
+    <button type="button" [disabled]="selectedTicketsCount === 0"
       class="shrink-0 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 sm:px-6 sm:text-sm"
-      (click)="reviewOrder()"
-    >
+      (click)="reviewOrder()">
       Review order
     </button>
   </div>
 
   @if (showOrderCart) {
-    <app-order-cart (close)="closeOrderCart()" (checkout)="checkout()" />
+  <app-order-cart (close)="closeOrderCart()" (checkout)="checkout()" />
   }
 </div>

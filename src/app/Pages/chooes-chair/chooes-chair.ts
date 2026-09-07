@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
 import { Header } from '../../Layout/header/header';
@@ -89,6 +90,7 @@ export class ChooesChair implements AfterViewInit {
   constructor(
     private readonly seatingMapService: SeatingMapService,
     private readonly orderCartService: OrderCartService,
+    private readonly router: Router,
   ) { }
 
   ngAfterViewInit(): void {
@@ -205,6 +207,7 @@ export class ChooesChair implements AfterViewInit {
   }
 
   checkout(): void {
+    this.router.navigate(['/payment/credit-card']);
   }
 
   zoomIn(): void {
