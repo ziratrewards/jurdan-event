@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Header } from '../../Layout/header/header';
 import { OrderCart } from '../../Components/order-cart/order-cart';
 import { Ticket } from '../../Core/models/ticket.model';
@@ -9,7 +10,7 @@ import { OrderItem } from '../../Core/models/order-item.model';
 
 @Component({
   selector: 'app-chooes-chair',
-  imports: [CommonModule, Header, OrderCart],
+  imports: [CommonModule, NgOptimizedImage, Header, OrderCart],
   templateUrl: './chooes-chair.html',
   styleUrl: './chooes-chair.css',
 })
