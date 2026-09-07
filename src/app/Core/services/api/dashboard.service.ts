@@ -26,7 +26,6 @@ export class DashboardService extends BaseApiService {
   getTransactions(): Observable<Transaction[]> {
     return this.get<any[]>(`${this.baseUrl}/all`).pipe(
       map(users => {
-        console.log('Raw API response:', users);
         if (!Array.isArray(users)) {
           return [];
         }
