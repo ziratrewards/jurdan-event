@@ -1,0 +1,416 @@
+<app-header></app-header>
+
+<main class="min-h-[calc(100vh-64px)] bg-white px-4 py-6 sm:px-6 lg:px-8">
+
+    <!-- Cover -->
+    <div class="mx-auto w-full max-w-5xl overflow-hidden rounded-3xl shadow-xl">
+        <img src="/images/amr_diab_cover.webp" alt="Amr Diab Cover" class="h-auto w-full object-contain">
+    </div>
+
+    <!-- Event Details -->
+    <section class="mx-auto mt-8 w-full max-w-5xl">
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_325px]">
+
+            <!-- Left Content -->
+            <div class="space-y-6">
+
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight text-black sm:text-4xl">
+                        AMR DIAB
+                    </h1>
+
+                    <h2 class="mt-4 text-xl font-semibold text-black">
+                        Ayla Oasis 2026
+                    </h2>
+                </div>
+
+                <p class="text-base leading-8 text-gray-700 sm:text-lg">
+                    Amr Diab is back in Aqaba for another unforgettable summer night
+                    at Ayla Oasis
+                </p>
+
+                <p class="text-base leading-8 text-gray-700 sm:text-lg">
+                    * For first row lounge reservation call us at +9627 9103 0007
+                </p>
+
+                <!-- Event Information -->
+                <div class="space-y-2 text-base sm:text-lg">
+
+                    <div class="flex flex-col sm:flex-row">
+                        <span class="w-32 font-bold">
+                            DATE:
+                        </span>
+
+                        <span>
+                            Friday, Sep. 18 — Doors open at: 4:00 PM
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row">
+                        <span class="w-32 font-bold">
+                            LOCATION:
+                        </span>
+
+                        <a href="#" class="underline hover:text-primary">
+                            Ayla Golf Club
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row">
+                        <span class="w-32 font-bold">
+                            INSTAGRAM:
+                        </span>
+
+                        <a href="#" class="underline hover:text-primary">
+                            165entertainment
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Ticket Card -->
+            <aside>
+
+                <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+
+                    <div class="flex items-center gap-4">
+
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                            <span class="text-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-primary lucide lucide-ticket h-5 w-5" aria-hidden="true">
+                                    <path
+                                        d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z">
+                                    </path>
+                                    <path d="M13 5v2"></path>
+                                    <path d="M13 17v2"></path>
+                                    <path d="M13 11v2"></path>
+                                </svg>
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-black">
+                                Get Your Tickets
+                            </h3>
+
+                            <p class="text-sm text-gray-500">
+                                Amr Diab 2026
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="mt-6 h-11 w-full rounded-full bg-primary px-6 font-semibold text-white transition-all hover:scale-[1.02] hover:opacity-90" routerLink="/choose">
+                        Buy Tickets
+                    </button>
+
+                </div>
+
+                <!-- Spotify Cards -->
+                <div class="mt-4 space-y-3">
+
+                    <div class="flex items-center gap-4 rounded-2xl bg-linear-to-r from-gray-400 to-gray-500 p-3">
+
+                        <img src="/images/amr_diab_cover.webp" class="h-16 w-16 rounded-xl object-cover" alt="">
+
+                        <div class="flex-1 text-right">
+                            <p class="font-semibold text-white">
+                                Lola El Banat
+                            </p>
+
+                            <p class="text-sm text-white/70">
+                                Amr Diab & Orange
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center gap-4 rounded-2xl bg-linear-to-r from-gray-700 to-gray-900 p-3">
+
+                        <img src="/images/amr_diab.jpg" class="h-16 w-16 rounded-xl object-cover" alt="">
+
+                        <div class="flex-1 text-right">
+                            <p class="font-semibold text-white">
+                                Khatfoony
+                            </p>
+
+                            <p class="text-sm text-white/70">
+                                Amr Diab, Orange & Jana Diab
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- Countdown -->
+        <div class="mt-14 pb-10 text-center">
+
+            <p class="text-xs font-bold tracking-[0.25em] text-gray-500">
+                EVENT STARTS IN
+            </p>
+
+            <div class="mt-5 flex items-start justify-center gap-3 sm:gap-5">
+
+                <div>
+                    <div
+                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-4xl font-bold text-primary sm:h-20 sm:w-20">
+                        {{ formattedDays() }}
+                    </div>
+                    <p class="mt-2 text-xs font-medium tracking-wider text-gray-500">
+                        DAYS
+                    </p>
+                </div>
+
+                <span class="mt-4 text-2xl text-gray-300">:</span>
+
+                <div>
+                    <div
+                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-4xl font-bold text-primary sm:h-20 sm:w-20">
+                        {{ formattedHours() }}
+                    </div>
+                    <p class="mt-2 text-xs font-medium tracking-wider text-gray-500">
+                        HOURS
+                    </p>
+                </div>
+                <span class="mt-4 text-2xl text-gray-300">:</span>
+                <div>
+                    <div
+                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-4xl font-bold text-primary sm:h-20 sm:w-20">
+                        {{ formattedMinutes() }}
+                    </div>
+                    <p class="mt-2 text-xs font-medium tracking-wider text-gray-500">
+                        MINS
+                    </p>
+                </div>
+                <span class="mt-4 text-2xl text-gray-300">:</span>
+                <div>
+                    <div
+                        class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-4xl font-bold text-primary sm:h-20 sm:w-20">
+                        {{ formattedSeconds() }}
+                    </div>
+                    <p class="mt-2 text-xs font-medium tracking-wider text-gray-500">
+                        SECS
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Location Map -->
+        <div class="mt-4 w-full overflow-hidden rounded-2xl border border-gray-300">
+
+            <iframe src="https://www.google.com/maps?q=Ayla+Golf+Club+Aqaba&output=embed"
+                class="h-87.5 w-full border-0 sm:h-112.5 lg:h-137.5" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+    <!-- Event Policy -->
+    <section class="mx-auto mt-8 w-full max-w-5xl pb-10">
+
+        <details class="group rounded-2xl border border-gray-200 bg-white shadow-sm" open>
+
+            <summary
+                class="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-xl font-bold text-black sm:px-6">
+                <span>Event Policy</span>
+
+                <svg class="h-5 w-5 text-gray-500 transition-transform duration-300 group-open:rotate-180" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6" />
+                </svg>
+            </summary>
+
+            <div class="border-t border-gray-100 px-5 py-5 text-sm leading-6 text-gray-700 sm:px-6">
+
+                <div class="space-y-5">
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Ticket Policy
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                All tickets are non-refundable and non-transferable.
+                            </li>
+                            <li>
+                                Re-entry to the event is not permitted unless officially
+                                authorized by event management.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Children Policy
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Children under the age of 5 are not permitted to attend
+                                the event.
+                            </li>
+                            <li>
+                                Children aged 5 years and above must possess a valid
+                                ticket for entry.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Prohibited Items
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Outside food and beverages, large bags, and luggage are
+                                prohibited inside the venue.
+                            </li>
+                            <li>
+                                Only small bags and handbags are permitted and may be
+                                subject to security inspection upon entry.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Smoking Policy
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Smoking is permitted only in designated smoking areas.
+                            </li>
+                            <li>
+                                Event management reserves the right to remove anyone
+                                violating the smoking policy.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Photography & Recording
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                By attending the event, you consent to being photographed,
+                                filmed, or recorded both visually and audibly.
+                            </li>
+                            <li>
+                                Event organizers reserve the right to use such materials
+                                for promotional or archival purposes without compensation.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Personal Belongings
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Event organizers are not responsible for any lost, stolen,
+                                or damaged personal belongings.
+                            </li>
+                            <li>
+                                Attendees are advised to keep their belongings secure at
+                                all times.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Safety & Conduct
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                All attendees must comply with the instructions of event
+                                staff and security personnel.
+                            </li>
+                            <li>
+                                Any inappropriate behavior or conduct that threatens
+                                public safety may result in removal from the venue
+                                without refund.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Acceptance of Terms
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Purchasing a ticket or attending the event constitutes
+                                full acceptance of all stated Terms & Conditions.
+                            </li>
+                            <li>
+                                Failure to comply with these terms may result in denied
+                                entry or removal from the event.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            Force Majeure
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                Event organizers shall not be held liable for any
+                                cancellation, delay, or disruption caused by circumstances
+                                beyond their control, including but not limited to natural
+                                disasters, government restrictions, or technical failures.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-900">
+                            No Re-Entry Policy
+                        </h3>
+
+                        <ul class="mt-1 list-disc space-y-1 pl-5">
+                            <li>
+                                For the safety and comfort of all attendees, re-entry to
+                                the venue is strictly prohibited once you exit the event
+                                premises.
+                            </li>
+                            <li>
+                                If you leave the venue during the event, your ticket will
+                                no longer be valid for re-entry.
+                            </li>
+                            <li>
+                                Please ensure you have all necessary personal belongings
+                                with you before entering the venue.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </details>
+
+    </section>
+
+</main>

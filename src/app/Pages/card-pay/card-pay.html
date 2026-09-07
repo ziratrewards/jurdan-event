@@ -1,0 +1,157 @@
+<app-header></app-header>
+<div class="min-h-[calc(100dvh-64px)] bg-[#fafafa] flex flex-col items-center py-10 px-4 sm:px-6">
+  <div class="w-full max-w-4xl">
+
+    <!-- Top Header -->
+    <div class="flex items-center justify-between mb-8">
+      <button class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition text-sm font-medium">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to tickets
+      </button>
+
+      <div class="flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-xs font-semibold">
+        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        9:45
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-6 lg:gap-8 items-start">
+
+      <!-- Left Column -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Event Details Box -->
+        <div class="bg-white rounded-[24px] border border-gray-100 p-6 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+          <h2 class="text-xl font-extrabold text-gray-900">AMR DIAB 2026</h2>
+
+          <div class="flex items-center gap-2 mt-2.5 text-[13px] font-medium text-gray-500">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Friday, September 18, 2026
+          </div>
+
+          <div class="mt-8 flex items-center justify-between">
+            <div class="flex items-center gap-2.5 text-sm font-bold text-gray-900">
+              <svg class="h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+              </svg>
+              General Admission <span class="text-gray-400 font-normal">× 1</span>
+            </div>
+            <span class="text-sm font-extrabold text-gray-900">90.00 JOD</span>
+          </div>
+        </div>
+
+        <!-- Card Details Box -->
+        <div class="bg-white rounded-[24px] border border-gray-100 p-6 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-extrabold text-gray-900">Card details</h2>
+            <div class="flex items-center gap-2">
+              <!-- Visa Icon -->
+              <div
+                class="h-6 w-9 rounded-[6px] bg-white flex items-center justify-center border border-gray-100 text-[9px] font-extrabold text-[#1434CB] italic shadow-sm tracking-tighter">
+                VISA</div>
+              <!-- Mastercard Icon -->
+              <div
+                class="h-6 w-9 rounded-[6px] bg-white flex items-center justify-center border border-gray-100 relative overflow-hidden shadow-sm">
+                <div class="w-3.5 h-3.5 rounded-full bg-[#EB001B] absolute left-1 opacity-90 z-10 mix-blend-multiply">
+                </div>
+                <div class="w-3.5 h-3.5 rounded-full bg-[#F79E1B] absolute right-1 opacity-90 z-0"></div>
+              </div>
+            </div>
+          </div>
+
+          <form class="space-y-4">
+            <div>
+              <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Card number</label>
+              <input type="text" placeholder="1234 5678 9012 3456"
+                class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Expiry month</label>
+                <input type="text" placeholder="MM"
+                  class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">Expiry year</label>
+                <input type="text" placeholder="YY"
+                  class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold text-gray-500 mb-1.5 ml-1">CVV</label>
+              <input type="text" placeholder="123"
+                class="w-full bg-[#f4f4f4] rounded-[16px] px-4 py-3.5 text-sm font-medium text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 transition border-none">
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="flex flex-col">
+        <!-- Order Summary Box -->
+        <div
+          class="bg-white rounded-[24px] border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col">
+          <!-- Top Part -->
+          <div class="p-6">
+            <h2 class="text-lg font-extrabold text-gray-900 mb-6">Order summary</h2>
+
+            <div class="flex items-center justify-between text-sm mb-4">
+              <span class="text-gray-500 font-bold">General Admission <span class="font-medium text-gray-400">×
+                  1</span></span>
+              <span class="font-extrabold text-gray-900">90.00 JOD</span>
+            </div>
+
+            <div class="h-px w-full bg-gray-100 mb-4"></div>
+
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="text-gray-400 font-bold">Subtotal <span class="font-medium">- 1 ticket</span></span>
+              <span class="font-bold text-gray-900">90.00 JOD</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-gray-400 font-medium">
+              <span>service charge (4%)</span>
+              <span>3.60 JOD</span>
+            </div>
+          </div>
+
+          <!-- Bottom Total Part -->
+          <div class="bg-[#f4f4f4] p-6 pt-5 pb-5 mt-auto border-t border-gray-100">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-extrabold text-gray-900">Total</span>
+              <span class="text-xl font-extrabold text-gray-900">93.60 JOD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pay Button -->
+        <button
+          class="w-full mt-5 bg-primary text-white rounded-[16px] py-4 font-bold text-sm hover:opacity-90 transition shadow-sm active:scale-[0.98]">
+          Pay 93.60 JOD
+        </button>
+
+        <!-- Secure Payment text -->
+        <div class="flex items-center justify-center gap-1.5 mt-5 text-[11px] font-medium text-gray-400">
+          <svg class="h-3.5 w-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          Secure payment powered by Madfcot
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
