@@ -62,6 +62,18 @@ export class CardPay {
     this.location.back();
   }
 
+  onPhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9+]/g, '');
+    this.paymentForm.get('personalInfo.phone')?.setValue(input.value, { emitEvent: false });
+  }
+
+  onEnglishOnlyInput(event: Event, controlPath: string) {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^\x00-\x7F]/g, '');
+    this.paymentForm.get(controlPath)?.setValue(input.value, { emitEvent: false });
+  }
+
   pay() {
     if (this.paymentForm.valid) {
       const personalInfo = this.paymentForm.value.personalInfo;
