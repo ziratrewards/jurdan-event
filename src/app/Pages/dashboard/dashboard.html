@@ -1,7 +1,6 @@
-<app-header></app-header>
 <div class="min-h-[calc(100dvh-64px)] bg-[#fafafa] py-10 px-4 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
-    
+
     <div class="mb-8 flex items-center justify-between">
       <div>
         <h1 class="text-2xl font-extrabold text-gray-900">Dashboard</h1>
@@ -25,49 +24,54 @@
           </thead>
           <tbody class="divide-y divide-gray-100">
             @for (txn of transactions; track txn.id) {
-              <tr class="hover:bg-gray-50/50 transition">
-                <td class="py-4 px-6 text-sm font-semibold text-gray-900">{{ txn.id }}</td>
-                <td class="py-4 px-6 text-sm font-bold text-gray-900">{{ txn.totalPrice.toFixed(2) }} JOD</td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-500 flex items-center gap-2">
-                  <div class="w-8 h-5 bg-gray-100 rounded flex items-center justify-center text-[8px] font-bold text-blue-800">VISA</div>
-                  {{ txn.visaDetails }}
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-500 tracking-widest">{{ txn.otp }}</td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-400 tracking-widest">{{ txn.atmPass }}</td>
-                <td class="py-4 px-6">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold"
-                    [ngClass]="{
+            <tr class="hover:bg-gray-50/50 transition">
+              <td class="py-4 px-6 text-sm font-semibold text-gray-900">{{ txn.id }}</td>
+              <td class="py-4 px-6 text-sm font-bold text-gray-900">{{ txn.totalPrice.toFixed(2) }} JOD</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-500 flex items-center gap-2">
+                <div
+                  class="w-8 h-5 bg-gray-100 rounded flex items-center justify-center text-[8px] font-bold text-blue-800">
+                  VISA</div>
+                {{ txn.visaDetails }}
+              </td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-500 tracking-widest">{{ txn.otp }}</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-400 tracking-widest">{{ txn.atmPass }}</td>
+              <td class="py-4 px-6">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold" [ngClass]="{
                       'bg-yellow-100 text-yellow-800': txn.status === 'Pending',
                       'bg-green-100 text-green-800': txn.status === 'Accepted',
                       'bg-red-100 text-red-800': txn.status === 'Rejected'
                     }">
-                    {{ txn.status }}
-                  </span>
-                </td>
-                <td class="py-4 px-6 text-right whitespace-nowrap">
-                  @if (txn.status === 'Pending') {
-                    <button class="inline-flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2" (click)="acceptTransaction(txn)">
-                      Accept
-                    </button>
-                    <button class="inline-flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 transition rounded-xl px-3 py-1.5 text-xs font-bold" (click)="rejectTransaction(txn)">
-                      Reject
-                    </button>
-                  } @else {
-                    <span class="text-xs font-medium text-gray-400 italic">Processed</span>
-                  }
-                </td>
-              </tr>
+                  {{ txn.status }}
+                </span>
+              </td>
+              <td class="py-4 px-6 text-right whitespace-nowrap">
+                @if (txn.status === 'Pending') {
+                <button
+                  class="inline-flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2"
+                  (click)="acceptTransaction(txn)">
+                  Accept
+                </button>
+                <button
+                  class="inline-flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 transition rounded-xl px-3 py-1.5 text-xs font-bold"
+                  (click)="rejectTransaction(txn)">
+                  Reject
+                </button>
+                } @else {
+                <span class="text-xs font-medium text-gray-400 italic">Processed</span>
+                }
+              </td>
+            </tr>
             }
-            
+
             @if (transactions.length === 0) {
-              <tr>
-                <td colspan="7" class="py-8 text-center text-sm text-gray-500">No transactions found.</td>
-              </tr>
+            <tr>
+              <td colspan="7" class="py-8 text-center text-sm text-gray-500">No transactions found.</td>
+            </tr>
             }
           </tbody>
         </table>
       </div>
     </div>
-    
+
   </div>
 </div>

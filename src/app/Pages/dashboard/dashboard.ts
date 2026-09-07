@@ -1,17 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Header } from "../../Layout/header/header";
 import { DashboardService, Transaction } from '../../Core/services/api/dashboard.service';
 
 @Component({
-  imports: [CommonModule, Header],
+  imports: [CommonModule],
   selector: 'app-dashboard',
   styleUrl: './dashboard.css',
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit {
   private readonly dashboardService = inject(DashboardService);
-  
+
   transactions: Transaction[] = [];
   isLoading = true;
 
