@@ -1,9 +1,111 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren, OnDestroy, OnInit, inject } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { Header } from "../../Layout/header/header";
 
 @Component({
-  imports: [],
+  imports: [CommonModule, Header],
   selector: 'app-card-otp',
   styleUrl: './card-otp.css',
   templateUrl: './card-otp.html',
 })
-export class CardOtp {}
+export class CardOtp implements OnInit, OnDestroy {
+  @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef<HTMLInputElement>>;
+  
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
+
+  otp: string[] = ['', '', '', '', '', ''];
+  timeLeft: number = 60;
+  timerInterval: any;
+
+  ngOnInit(): void {
+    this.startTimer();
+  }
+
+  ngOnDestroy(): void {
+    this.clearTimer();
+  }
+
+  startTimer(): void {
+    this.timeLeft = 60;
+    this.clearTimer();
+    this.timerInterval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.clearTimer();
+      }
+    }, 1000);
+  }
+
+  clearTimer(): void {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
+  }
+
+  resendCode(): void {
+    if (this.timeLeft === 0) {
+      this.otp = ['', '', '', '', '', ''];
+      this.startTimer();
+    }
+  }
+
+  get isOtpComplete(): boolean {
+    return this.otp.every(val => val !== '');
+  }
+
+  onInput(event: Event, index: number): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+    
+    if (!/^\d*$/.test(value)) {
+      inputElement.value = this.otp[index];
+      return;
+    }
+
+    const lastChar = value.slice(-1);
+    this.otp[index] = lastChar;
+    inputElement.value = lastChar;
+
+    if (lastChar && index < 5) {
+      this.otpInputs.toArray()[index + 1].nativeElement.focus();
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent, index: number): void {
+    if (event.key === 'Backspace' && !this.otp[index] && index > 0) {
+      this.otpInputs.toArray()[index - 1].nativeElement.focus();
+    }
+  }
+
+  onPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    const pastedData = event.clipboardData?.getData('text');
+    if (pastedData) {
+      const numbers = pastedData.replace(/\D/g, '').slice(0, 6).split('');
+      numbers.forEach((num, i) => {
+        if (i < 6) {
+          this.otp[i] = num;
+        }
+      });
+      const focusIndex = numbers.length < 6 ? numbers.length : 5;
+      setTimeout(() => {
+        if (this.otpInputs) {
+           this.otpInputs.toArray()[focusIndex].nativeElement.focus();
+        }
+      });
+    }
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  verify(): void {
+    if (this.isOtpComplete) {
+      this.router.navigate(['/payment/atm-pass']);
+    }
+  }
+}
