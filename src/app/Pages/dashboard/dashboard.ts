@@ -36,7 +36,6 @@ export class Dashboard implements OnInit, OnDestroy {
     this.errorMessage.set(null);
     this.dashboardService.getTransactions().subscribe({
       next: (data) => {
-        console.log('Mapped transactions:', data);
         this.transactions.set(data);
         this.isLoading.set(false);
         this.cdr.markForCheck();

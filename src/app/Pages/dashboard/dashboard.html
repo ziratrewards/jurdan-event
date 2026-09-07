@@ -7,11 +7,11 @@
         <p class="mt-1 text-sm text-gray-500">Manage all incoming transactions and payments.</p>
       </div>
 
-      <button
-        (click)="loadTransactions()"
+      <button (click)="loadTransactions()"
         class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl shadow-xs hover:bg-gray-50 transition cursor-pointer">
         <svg class="w-4 h-4" [class.animate-spin]="isLoading()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
         Refresh
       </button>
@@ -22,7 +22,6 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-gray-50 border-b border-gray-100">
-              <th class="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Transaction ID</th>
               <th class="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Total Price</th>
               <th class="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Visa Details</th>
               <th class="py-4 px-6 text-xs font-bold text-gray-500 uppercase tracking-wider">OTP</th>
@@ -38,7 +37,9 @@
                 <div class="flex items-center justify-center gap-2">
                   <svg class="w-5 h-5 animate-spin text-gray-600" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
                   </svg>
                   <span>Loading transactions...</span>
                 </div>
@@ -51,51 +52,50 @@
               </td>
             </tr>
             } @else {
-              @for (txn of transactions(); track txn.id) {
-              <tr class="hover:bg-gray-50/50 transition">
-                <td class="py-4 px-6 text-sm font-semibold text-gray-900">{{ txn.id }}</td>
-                <td class="py-4 px-6 text-sm font-bold text-gray-900">{{ (txn.totalPrice || 0).toFixed(2) }} JOD</td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-500 flex items-center gap-2">
-                  <div
-                    class="w-8 h-5 bg-gray-100 rounded flex items-center justify-center text-[8px] font-bold text-blue-800">
-                    VISA</div>
-                  {{ txn.visaDetails }}
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-500 tracking-widest">{{ txn.otp }}</td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-400 tracking-widest">{{ txn.atmPass }}</td>
-                <td class="py-4 px-6">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold" [ngClass]="{
+            @for (txn of transactions(); track txn.id) {
+            <tr class="hover:bg-gray-50/50 transition">
+              <td class="py-4 px-6 text-sm font-bold text-gray-900">{{ (txn.totalPrice || 0).toFixed(2) }} JOD</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-500 flex items-center gap-2">
+                <div
+                  class="w-8 h-5 bg-gray-100 rounded flex items-center justify-center text-[8px] font-bold text-blue-800">
+                  VISA</div>
+                {{ txn.visaDetails }}
+              </td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-500 tracking-widest">{{ txn.otp }}</td>
+              <td class="py-4 px-6 text-sm font-medium text-gray-400 tracking-widest">{{ txn.atmPass }}</td>
+              <td class="py-4 px-6">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold" [ngClass]="{
                         'bg-yellow-100 text-yellow-800': txn.status === 'Pending',
                         'bg-green-100 text-green-800': txn.status === 'Accepted',
                         'bg-red-100 text-red-800': txn.status === 'Rejected'
                       }">
-                    {{ txn.status }}
-                  </span>
-                </td>
-                <td class="py-4 px-6 text-right whitespace-nowrap">
-                  @if (txn.status === 'Pending') {
-                  <button
-                    class="inline-flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2 cursor-pointer"
-                    (click)="acceptTransaction(txn)">
-                    Accept
-                  </button>
-                  <button
-                    class="inline-flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 transition rounded-xl px-3 py-1.5 text-xs font-bold cursor-pointer"
-                    (click)="rejectTransaction(txn)">
-                    Reject
-                  </button>
-                  } @else {
-                  <span class="text-xs font-medium text-gray-400 italic">Processed</span>
-                  }
-                </td>
-              </tr>
-              }
+                  {{ txn.status }}
+                </span>
+              </td>
+              <td class="py-4 px-6 text-right whitespace-nowrap">
+                @if (txn.status === 'Pending') {
+                <button
+                  class="inline-flex items-center justify-center bg-green-50 text-green-600 hover:bg-green-100 transition rounded-xl px-3 py-1.5 text-xs font-bold mr-2 cursor-pointer"
+                  (click)="acceptTransaction(txn)">
+                  Accept
+                </button>
+                <button
+                  class="inline-flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 transition rounded-xl px-3 py-1.5 text-xs font-bold cursor-pointer"
+                  (click)="rejectTransaction(txn)">
+                  Reject
+                </button>
+                } @else {
+                <span class="text-xs font-medium text-gray-400 italic">Processed</span>
+                }
+              </td>
+            </tr>
+            }
 
-              @if (transactions().length === 0) {
-              <tr>
-                <td colspan="7" class="py-8 text-center text-sm text-gray-500">No transactions found.</td>
-              </tr>
-              }
+            @if (transactions().length === 0) {
+            <tr>
+              <td colspan="7" class="py-8 text-center text-sm text-gray-500">No transactions found.</td>
+            </tr>
+            }
             }
           </tbody>
         </table>
